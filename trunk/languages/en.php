@@ -5,6 +5,7 @@
  */
 
 $en = array(
+	'elgg_statistics:statistics' => 'Advanced Statistics',
 	'elgg_statistics:site' => 'Site Statistics',
 	'elgg_statistics:user' => 'User Statistics',
 	'elgg_statistics:group' => 'Group Statistics',
