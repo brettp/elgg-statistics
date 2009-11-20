@@ -62,27 +62,23 @@ function elgg_statistics_pagehandler($page){
  * Serve up the admin page.
  * @return str
  */
-function elgg_statistics_user_page(){
-
-
-}
-
-/**
- * Serve up the admin page.
- * @return str
- */
 function elgg_statistics_site_page(){
-
-
+    echo elgg_view("statistics/site");
 }
 
 /**
- * Serve up the admin page.
+ * Serve up the user page
  * @return str
  */
 function elgg_statistics_user_page(){
-
-
+    echo elgg_view("statistics/user");
+}
+/**
+ * Serve up the group page
+ * @return str
+ */
+function elgg_statisitics_group_page(){
+    echo elgg_view("statistics/group");
 }
 
 register_elgg_event_handler('init', 'system', 'elgg_statistics_init');
