@@ -35,6 +35,8 @@ function elgg_statistics_pagesetup(){
  * @return str
  */
 function elgg_statistics_pagehandler($page){
+	$old_context = get_context();
+	set_context('stats_admin');
 
 	switch($page[0]){
 		case 'user':
@@ -53,6 +55,8 @@ function elgg_statistics_pagehandler($page){
 			$content = elgg_statistics_site_page();
 	}
 
+	set_context($old_context);
+
 	$content_title = elgg_view_title($title);
 	$body = elgg_view_layout('two_column_left_sidebar', '', '' . $content_title . $content);
 	page_draw($title, $body);
@@ -63,7 +67,7 @@ function elgg_statistics_pagehandler($page){
  * @return str
  */
 function elgg_statistics_site_page(){
-    echo elgg_view("statistics/site");
+	echo elgg_view("statistics/site");
 }
 
 /**
@@ -71,14 +75,15 @@ function elgg_statistics_site_page(){
  * @return str
  */
 function elgg_statistics_user_page(){
-    echo elgg_view("statistics/user");
+	echo elgg_view("statistics/user");
 }
+
 /**
  * Serve up the group page
  * @return str
  */
 function elgg_statisitics_group_page(){
-    echo elgg_view("statistics/group");
+	echo elgg_view("statistics/group");
 }
 
 register_elgg_event_handler('init', 'system', 'elgg_statistics_init');
