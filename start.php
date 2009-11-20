@@ -14,6 +14,18 @@
  */
 function elgg_statistics_init(){
 	register_page_handler("statistics","elgg_statistics_pagehandler");
+
+	// register unit tests for stats
+	register_plugin_hook('unit_test', 'system', 'elgg_statistics_test');
+}
+
+/**
+ * Runs unit tests for the stats object.
+ */
+function elgg_statistics_test($hook, $type, $value, $params) {
+	global $CONFIG;
+	$value[] = dirname(__FILE__) . '/tests.php';
+	return $value;
 }
 
 /**
@@ -68,7 +80,7 @@ function elgg_statistics_pagehandler($page){
  * Serve up the admin page.
  * @return str
  */
-function elgg_statistics_site_page(){
+function elgg_statistics_site_page() {
 	echo elgg_view("statistics/site");
 }
 
