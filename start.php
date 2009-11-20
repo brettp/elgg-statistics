@@ -35,8 +35,10 @@ function elgg_statistics_pagesetup(){
  * @return str
  */
 function elgg_statistics_pagehandler($page){
+	admin_gatekeeper();
+
 	$old_context = get_context();
-	set_context('stats_admin');
+	set_context('admin');
 
 	switch($page[0]){
 		case 'user':
