@@ -10,3 +10,5 @@ $en = array(
 	'elgg_statistics:group' => 'Group Statistics',
 
 );
+
+add_translation('en', $en);
