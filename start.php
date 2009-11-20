@@ -17,14 +17,12 @@ function elgg_statistics_pagehandler($page){
 
     switch($page[0]){
         default:
-            elgg_statistics_wrapper();
+            elgg_statistics_admin_page();
     }
-
 }
 
-function elgg_statistics_wrapper($page){
-    require dirname(__FILE__)."/index.php";
-
+function elgg_statistics_admin_page(){
 }
+
 register_elgg_event_handler('init','system','elgg_statistics_init');
 register_elgg_event_handler('pagesetup','system','elgg_statistics_pagesetup');
