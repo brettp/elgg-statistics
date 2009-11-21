@@ -33,7 +33,7 @@ $labels = array();
 $ticks = array();
 $values_today = array();
 $values_me = array();
-$values_friends = array();
+$values = array();
 
 if(!empty($vars["data"])){
     foreach($vars["data"] as $label => $point_data){
@@ -43,20 +43,20 @@ if(!empty($vars["data"])){
         $max_value = max($point_data["TODAY"],$max_value);
         $values_me[]="[".($i+0.5).",${point_data["ME"]}]";
         $max_value = max($point_data["ME"],$max_value);
-        $values_friends[]="[".($i+0.8).",${point_data["FRIENDS"]}]";
+        $values[]="[".($i+0.8).",${point_data["values"]}]";
         $max_value = max($point_data["FRIENDS"],$max_value);
         $i++;
     }
 }
 
-$max = (!empty($vars["max"]))?$vars["max"]:10;
-$max = ($max<$max_value)?"":",max:$max";
+//$max = (!empty($vars["max"]))?$vars["max"]:10;
+//$max = ($max<$max_value)?"":",max:$max";
 
 $labels = implode(",",$labels);
 $ticks = implode(",",$ticks);
 $values_today = implode(",",$values_today);
 $values_me = implode(",",$values_me);
-$values_friends = implode(",",$values_friends);
+$values = implode(",",$values);
 
 
 
@@ -69,19 +69,16 @@ $values_friends = implode(",",$values_friends);
   jQuery(document).ready(function(){
 	  var labels = [<?php echo $labels?>];
 	  var ticks_values = [<?php echo $ticks?>];
-	  var values_today = [<?php echo $values_today?>];
-	  var values_me = [<?php echo $values_me?>];
-	  var values_friends = [<?php echo $values_friends?>];
-	  var data = [{data:values_today,label:"<?php echo elgg_echo("estadisticas:today")?>",bars: { show: true,barWidth: 0.25, fill: 0.9,align:'center' }},
-	              {data:values_me,label:"<?php echo elgg_echo("estadisticas:me")?>",bars: { show: true,barWidth: 0.25, fill: 0.9,align:'center' }},
-	              {data:values_friends,label:"<?php echo elgg_echo("estadisticas:friends")?>",bars: { show: true,barWidth: 0.25, fill: 0.9,align:'center' }}
+	  var values = [<?php echo $values?>];
+	  var data = [
+	              {data:values,label:"<?php echo elgg_echo($statistics_title)?>",bars: { show: true,barWidth: 0.25, fill: 0.9,align:'center' }}
 	  			 ];
 
 	  jQuery.plot(jQuery("#<?php echo $id;?>"),
 			  	  data,
 			  	  {
 					legend: { position: 'ne', noColumns:3, ymargin:12,xmargin:5 },
-					yaxis: {autoscaleMargin:0.08,min:0,tickDecimals:0,tickSize:2<?php echo $max;?>},
+					yaxis: {autoscaleMargin:0.08,min:0,tickDecimals:0/*,tickSize:2<?php echo $max;?>*/},
 		  			xaxis: { tickFormatter: function (v, axis) { return labels[Math.floor(v)-1]; },
 			  				autoscaleMargin:0.1,
 			  				ticks: ticks_values
