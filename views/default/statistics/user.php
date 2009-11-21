@@ -49,7 +49,7 @@
 //	}
 
 	
-	$tmp = function_mia();
+	$tmp = get_objects_quantity_by_user();
 
 	$data = array();
 	foreach($tmp as $user_guid => $objects_quantity){
