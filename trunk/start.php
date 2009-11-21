@@ -102,7 +102,7 @@ function elgg_statistics_site_page() {
  * @return str
  */
 function elgg_statistics_user_page(){
-    echo elgg_view("statistics/user");
+    return elgg_view("statistics/user");
 }
 
 /**

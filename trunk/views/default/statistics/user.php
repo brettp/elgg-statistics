@@ -1,14 +1,14 @@
-<?php 
+<?php
 
 	extend_view("metatags","statistics/flot");
 
 //	$users_count = get_entities('user','','','','','',true);
 //	$users = get_entities('user','','','',$users_count);
-//	
+//
 //	$objects_per_user = array();
-//	
+//
 //	if ($users_count){
-//		
+//
 //		foreach($users as $user){
 //			$objects_count = count_user_objects($user->guid);
 //
@@ -20,7 +20,7 @@
 //			}
 //		}
 //	}
-//	
+//
 //	//order by the quantity of objects
 //	ksort($objects_per_user);
 //
@@ -29,11 +29,11 @@
 //
 //
 //	$tmp = array();
-//	
+//
 //	$limit = 10;
 //	$count = 0;
-//	
-//	
+//
+//
 //	//we show just first $limit
 //	foreach($objects_per_user as $object_count => $users){
 //		foreach($users as $user_guid){
@@ -47,7 +47,7 @@
 //			break;
 //		}
 //	}
-	
+
 //	pr($tmp);
 
 //
@@ -90,5 +90,5 @@ echo "<br>";
 //// Cambiando las opciones de visualización
 //echo elgg_view("output/estadisticas",array("internalname"=>"test4","data"=>$data,"background"=>"#c0c0c0","width"=>300,"height"=>150));
 //echo "<br>"
-	
+
 ?>
