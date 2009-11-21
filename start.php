@@ -102,6 +102,7 @@ function elgg_statistics_site_page() {
  * @return str
  */
 function elgg_statistics_user_page(){
+	require dirname(__FILE__)."/lib/statistics.php";
     return elgg_view("statistics/user");
 }
 

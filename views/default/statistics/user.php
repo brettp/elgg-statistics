@@ -1,56 +1,8 @@
 <?php
 
 	extend_view("metatags","statistics/flot");
-
-//	$users_count = get_entities('user','','','','','',true);
-//	$users = get_entities('user','','','',$users_count);
-//
-//	$objects_per_user = array();
-//
-//	if ($users_count){
-//
-//		foreach($users as $user){
-//			$objects_count = count_user_objects($user->guid);
-//
-//			if (!array_key_exists($objects_count,$objects_per_user)){
-//				$objects_per_user[$objects_count] = array($user->username);
-//			}
-//			else{
-//				$objects_per_user[$objects_count][] = $user->username;
-//			}
-//		}
-//	}
-//
-//	//order by the quantity of objects
-//	ksort($objects_per_user);
-//
-//	//we put the latest first
-//	$objects_per_user = array_reverse($objects_per_user,true);
-//
-//
-//	$tmp = array();
-//
-//	$limit = 10;
-//	$count = 0;
-//
-//
-//	//we show just first $limit
-//	foreach($objects_per_user as $object_count => $users){
-//		foreach($users as $user_guid){
-//			if ($count == $limit){
-//				break;
-//			}
-//			$count ++;
-//			$tmp[$user_guid] = $object_count;
-//		}
-//		if ($count == $limit){
-//			break;
-//		}
-//	}
-
 	
-	$tmp = get_objects_quantity_by_user();
-
+	$tmp = get_objects_quantity_by_group();
 	$data = array();
 	foreach($tmp as $user_guid => $objects_quantity){
 		
