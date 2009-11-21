@@ -121,3 +121,46 @@ function get_objects_quantity_by_user() {
 function get_objects_quantity_by_group() {
 	return get_objects_quantity_by_entity('group');
 }
+
+/**
+ * 
+ * Esta funcion obtiene los usuarios que mas mensajes enviaron ordenados descendentemente.
+ * This function get the users that send most messages order desc.
+ * 
+ * @param $limit int
+ * @return ElggUsers entity
+ * @author. Carlos Tealdi & Diego Gallardo.
+ */
+function statistics_get_entity_users_messages($limit = null) {
+	global $CONFIG;
+
+	$limit = get_entities('user', '', '', '', 0, 0, true);
+	$users = get_entities('user', '', '', '', $limit);
+	
+	$user_message_array = array();
+	
+	//Now we just acumulate the users ans count the messages they sent.
+	foreach($users as $user) {
+		$message_count = get_entities_from_metadata('fromId',$user->getGUID(),'object','messages', $user->getGUID(), 0, 0, '', 0, true);
+		
+		if($message_count) {
+			$user_message_array[$user->getGUID()] = $message_count;
+		}
+	}
+	
+	//Now we sort the users by they count messages.
+	arsort($user_message_array);
+	
+	//Slice the array if we have a limit.
+	if(!is_null($limit) && count($user_message_array) > $limit) {
+		$user_message_array = array_slice($user_message_array, 0, $limit, true);
+	}
+	
+	//Get the entities to return it.
+	$entities = array();
+	foreach($user_message_array as $user_guid => $data) {
+		$entities[] = get_entity($user_guid);
+	} 
+			
+	return $entities;
+}
