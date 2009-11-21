@@ -13,10 +13,10 @@
 //			$objects_count = count_user_objects($user->guid);
 //
 //			if (!array_key_exists($objects_count,$objects_per_user)){
-//				$objects_per_user[$objects_count] = array($user->guid);
+//				$objects_per_user[$objects_count] = array($user->username);
 //			}
 //			else{
-//				$objects_per_user[$objects_count][] = $user->guid;
+//				$objects_per_user[$objects_count][] = $user->username;
 //			}
 //		}
 //	}
@@ -48,34 +48,21 @@
 //		}
 //	}
 
-//	pr($tmp);
+	
+	$tmp = function_mia();
 
-//
-$data = array(
-    'par3' => array(
-        'TODAY' => 4,
-        'ME' => 3,
-        'FRIENDS' => 5,
-    ),
-    'par4' => array(
-        'TODAY' => 4,
-        'ME' => 3,
-        'FRIENDS' => 5,
-    ),
-    'par5' => array(
-        'TODAY' => 4,
-        'ME' => 3,
-        'FRIENDS' => 5,
-    ),
-    'par6' => array(
-        'TODAY' => 7,
-        'ME' => 2,
-        'FRIENDS' => 8,
-    ),
-    );
-//
+	$data = array();
+	foreach($tmp as $user_guid => $objects_quantity){
+		
+		$data[$user_guid] = array('values'=>$objects_quantity);
+		
+	}
+	
+
+
 // Valores por defecto
-echo elgg_view("output/estadisticas",array("internalname"=>"test1","data"=>$data));
+$statistics_title = 'statistics:title';
+echo elgg_view("output/estadisticas",array("internalname"=>"test1","data"=>$data,'statistics_title'=>$statistics_title));
 echo "<br>";
 //
 //// Cambiando el maximo
