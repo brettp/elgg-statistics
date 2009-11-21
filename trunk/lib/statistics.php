@@ -62,54 +62,62 @@ function get_number_users_by_lang($show_deactivated = false) {
 	    }
 	}
 	return $result;
-
 }
 
-
-function get_objects_quantity_by_user(){
-	$users_count = get_entities('user','','','','','',true);
-	$users = get_entities('user','','','',$users_count);
+function get_objects_quantity_by_entity($entity_type = 'user') {
+	$entities_count = get_entities($entity_type, '', '', '', '', '', true);
+	$entities = get_entities($entity_type, '', '', '', $entities_count);
 	
-	$objects_per_user = array();
-	
-	if ($users_count){
-		
-		foreach($users as $user){
-			$objects_count = count_user_objects($user->guid);
-
-			if (!array_key_exists($objects_count,$objects_per_user)){
-				$objects_per_user[$objects_count] = array($user->username);
+	$objects_per_entity = array();
+	if ($entities_count) {
+		foreach($entities as $entity){
+			$objects_count = count_user_objects($entity->guid);
+			
+			if (!array_key_exists($objects_count, $objects_per_entity)) {
+				$objects_per_entity[$objects_count] = array($entity->name);
 			}
 			else{
-				$objects_per_user[$objects_count][] = $user->username;
+				if ($entity instanceof ElggUser) {
+					$title = $entity->name;
+				} else {
+					$title = $entity->title;
+				}
+				$objects_per_entity[$objects_count][] = $title;
 			}
 		}
 	}
 	
 	//order by the quantity of objects
-	ksort($objects_per_user);
-
+	ksort($objects_per_entity);
+	
 	//we put the latest first
-	$objects_per_user = array_reverse($objects_per_user,true);
-
-
+	$objects_per_entity = array_reverse($objects_per_entity, true);
+	
 	$tmp = array();
 	
 	$limit = 10;
 	$count = 0;
 	
-	
 	//we show just first $limit
-	foreach($objects_per_user as $object_count => $users){
-		foreach($users as $user_guid){
+	foreach($objects_per_entity as $object_count => $entity){
+		foreach($entity as $entity_guid){
 			if ($count == $limit){
 				break;
 			}
 			$count ++;
-			$tmp[$user_guid] = $object_count;
+			$tmp[$entity_guid] = $object_count;
 		}
 		if ($count == $limit){
 			break;
 		}
-	}
+	}	
+	return $tmp;	
+}
+
+function get_objects_quantity_by_user() {
+	return get_objects_quantity_by_entity('user');
+}
+
+function get_objects_quantity_by_group() {
+	return get_objects_quantity_by_entity('group');
 }
