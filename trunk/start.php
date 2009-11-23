@@ -83,10 +83,16 @@ function elgg_statistics_pagehandler($page){
  */
 function elgg_statistics_site_page() {
 
-    require dirname(__FILE__)."/lib/statistics.php";
-
+	require dirname(__FILE__)."/lib/statistics.php";
+	
     //FIXME Do this in a way that would be 'discoverable'
-    $site_graphs = array("users_time","users_language");
+    $site_graphs = array(
+    	"users_time",
+    	"users_language", 
+    	"users_messages",
+    	"users_objects_quantity",
+    	"groups_objects_quantity"
+    );
     $data = array();
     foreach($site_graphs as $graph){
         $data_function = "{$graph}_site_data";
