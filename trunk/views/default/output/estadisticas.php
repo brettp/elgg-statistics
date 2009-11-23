@@ -80,7 +80,7 @@ $values = implode(",",$values);
 					legend: { position: 'ne', noColumns:3, ymargin:12,xmargin:5 },
 					yaxis: {autoscaleMargin:0.08,min:0,tickDecimals:0/*,tickSize:2<?php echo $max;?>*/},
 		  			xaxis: { tickFormatter: function (v, axis) { return labels[Math.floor(v)-1]; },
-			  				autoscaleMargin:0.1,
+			  				autoscaleMargin:0.01,
 			  				ticks: ticks_values
 			  				},
 			  		grid: {backgroundColor:<?php echo $background;?>}

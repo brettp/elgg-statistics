@@ -2,11 +2,14 @@
 
 	extend_view("metatags","statistics/flot");
 	
-	$tmp = get_objects_quantity_by_group();
+	$tmp = users_objects_quantity_site_data();
+	elgg_dump($tmp);
 	$data = array();
-	foreach($tmp as $user_guid => $objects_quantity){
+	foreach($tmp as $key => $objects){
 		
-		$data[$user_guid] = array('values'=>$objects_quantity);
+		$data[$objects->name] = array(
+			'values' => $objects->amount
+		);
 		
 	}
 	
