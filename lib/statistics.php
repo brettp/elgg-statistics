@@ -5,7 +5,7 @@
  * @return array
  */
 function users_time_site_data() {
-	return get_entities_created_on_the_time('user', '', 'day');
+	return get_entities_created_on_the_time('user', '', 'month');
 }
 
 /**
@@ -29,7 +29,7 @@ function groups_objects_quantity_site_data() {
  * Get Entities created on the time
  * @return Array
  */
-function get_entities_created_on_the_time($type, $subtype, $separared_by='day', $timelower = null, $timelower = null){
+function get_entities_created_on_the_time($type, $subtype, $grouped_by='day', $timelower = null, $timelower = null){
     $count_entities = get_entities($type, $subtype, 0, 'time_created', 0, 0, true, null, null, $timelower, $timeupper);
     $data = array();
     $old_date = "";
@@ -37,7 +37,7 @@ function get_entities_created_on_the_time($type, $subtype, $separared_by='day', 
         $entities = get_entities($type, $subtype, 0,'time_created', 100, $i, false, null, null, $timelower, $timeupper);
         if (!empty($entities)) { 
             foreach($entities as $entity){
-            	switch($separared_by) {
+            	switch($grouped_by) {
             		case 'year':
             			$format_time = 'y';
             			break;
